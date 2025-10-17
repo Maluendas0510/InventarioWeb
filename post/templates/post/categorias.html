@@ -1,0 +1,36 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block title %}Categorías | Inventario{% endblock title %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'post/css/categorias.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<h1>Categorías</h1>
+
+<div class="categorias-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Equipos eléctricos</td>
+                <td><button>Editar</button> <button>Eliminar</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Repuestos</td>
+                <td><button>Editar</button> <button>Eliminar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock content %}
