@@ -1,0 +1,52 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<title>Productos</title>
+<link rel="stylesheet" href="{% static 'css/productos.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+<div class="main-content">
+    <h1>📦 Productos</h1>
+
+    <div class="card">
+        <h2>Agregar nuevo producto</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Guardar</button>
+        </form>
+    </div>
+
+    <h2>Lista de productos</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Categoría</th>
+                <th>Proveedor</th>
+                <th>Stock</th>
+                <th>Precio</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ producto.proveedor }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>${{ producto.precio }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No hay productos registrados.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock content %}

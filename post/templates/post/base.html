@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Inventario{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'post/css/base.css' %}">
+    {% block extra_head %}{% endblock extra_head %}
+</head>
+<body>
+    <div class="sidebar">
+        <h2>📦 Inventario</h2>
+        <ul>
+            <li><a href="{% url 'index' %}">🏠 Inicio</a></li>
+            <li><a href="{% url 'categorias' %}">🏷️ Categorías</a></li>
+            <li><a href="{% url 'proveedores'%}">🚚 Proveedores</a></li>
+            <li><a href="{% url 'productos'%}">📦 Productos</a></li>
+            <li><a href="#">🧾 Ventas</a></li>
+            <li><a href="#">📊 Dashboard</a></li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+        {% block content %}
+        {% endblock content %}
+    </div>
+</body>
+</html>
