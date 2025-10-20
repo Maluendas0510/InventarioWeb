@@ -1,13 +1,91 @@
 {% extends 'post/base.html' %}
 {% load static %}
-
-{% block title %}Inicio | Inventario{% endblock title %}
+{% block title %}Inicio{% endblock %}
 
 {% block content %}
-<h1>Bienvenido al Sistema de Inventario</h1>
-<p>Administra productos, proveedores, categorías y ventas de forma sencilla.</p>
+<div class="inicio-container">
+  <div class="welcome-card">
+    <h1>BIENVENIDO, <span>{{ user.first_name }} {{ user.last_name }}</span></h1>
+    <p>Administra productos, proveedores, categorías e información de forma sencilla.</p>
+    <div class="stats">
+      <div class="stat-card">
+        <h3>{{ categorias|length }}</h3>
+        <p>Categorías</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ productos|length }}</h3>
+        <p>Productos</p>
+      </div>
+      <div class="stat-card">
+        <h3>{{ proveedores|length }}</h3>
+        <p>Proveedores</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<section class="info">
-    <p>Usa el menú lateral para acceder a las secciones del sistema.</p>
-</section>
-{% endblock content %}
+<style>
+.inicio-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.welcome-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 70%;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.welcome-card h1 {
+  font-size: 2rem;
+  color: #111827;
+}
+
+.welcome-card span {
+  color: #4f46e5;
+  font-weight: bold;
+}
+
+.welcome-card p {
+  margin-top: 10px;
+  color: #000000;
+  font-size: 1.1rem;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.stat-card {
+  background: #1c52e6;
+  color: white;
+  border-radius: 12px;
+  width: 30%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgb(0, 0, 0);
+  transition: transform 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+}
+
+.stat-card h3 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.stat-card p {
+  margin: 5px 0 0;
+  font-weight: 500;
+}
+</style>
+{% endblock %}

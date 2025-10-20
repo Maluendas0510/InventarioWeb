@@ -10,14 +10,23 @@
 </head>
 <body>
     <div class="sidebar">
-        <h2>📦 Inventario</h2>
+        <h2> SISTEMA DE INVENTARIO </h2>
+        <div class="login-btn">
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}" class="logout">Cerrar sesión</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="login">INGRESAR</a>
+        {% endif %}
+    </div>
+
         <ul>
-            <li><a href="{% url 'index' %}">🏠 Inicio</a></li>
-            <li><a href="{% url 'categorias' %}">🏷️ Categorías</a></li>
-            <li><a href="{% url 'proveedores'%}">🚚 Proveedores</a></li>
-            <li><a href="{% url 'productos'%}">📦 Productos</a></li>
-            <li><a href="#">🧾 Ventas</a></li>
-            <li><a href="#">📊 Dashboard</a></li>
+            <li><a href="{% url 'index' %}"> Inicio</a></li>
+            <li><a href="{% url 'categorias' %}"> Categorías</a></li>
+            <li><a href="{% url 'proveedores'%}"> Proveedores</a></li>
+            <li><a href="{% url 'productos'%}"> Productos</a></li>
+            <li><a href="{% url 'informacion' %}"> Información</a></li>
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+
         </ul>
     </div>
 
@@ -25,5 +34,8 @@
         {% block content %}
         {% endblock content %}
     </div>
+  
 </body>
 </html>
+
+

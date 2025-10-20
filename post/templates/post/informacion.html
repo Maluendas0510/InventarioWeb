@@ -1,0 +1,106 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block title %}Información{% endblock %}
+
+{% block content %}
+<h2>Información General</h2>
+
+<style>
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #4f46e5;
+  color: white;
+}
+tbody tr:hover {
+  background-color: #f1f5f9;
+}
+h3 {
+  color: #4f46e5;
+}
+</style>
+
+<h3>Categorías</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in categorias %}
+      <tr>
+        <td>{{ c.id }}</td>
+        <td contenteditable="true">{{ c.nombre }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="2">No hay categorías registradas.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3>Productos</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Proveedor</th>
+      <th>Categoría</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in productos %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td contenteditable="true">{{ p.nombre }}</td>
+        <td contenteditable="true">{{ p.descripcion }}</td>
+        <td contenteditable="true">{{ p.precio }}</td>
+        <td contenteditable="true">{{ p.cantidad }}</td>
+        <td>{{ p.proveedor.nombre }}</td>
+        <td>{{ p.categoria.nombre }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="7">No hay productos registrados.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3>Proveedores</h3>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in proveedores %}
+      <tr>
+        <td>{{ p.id }}</td>
+        <td contenteditable="true">{{ p.nombre }}</td>
+        <td contenteditable="true">{{ p.email }}</td>
+        <td contenteditable="true">{{ p.telefono }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4">No hay proveedores registrados.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
