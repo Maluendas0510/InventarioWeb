@@ -11,14 +11,17 @@ class Categoria(models.Model):
     
 class Producto(models.Model):
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
+    descripcion = models.TextField(blank=True, null=True)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
-    cantidad = models.IntegerField()
+    cantidad = models.IntegerField(default=0)  # ✅ ahora tiene valor por defecto
     precio_venta = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    stock_actual = models.IntegerField(null=True, blank=True)   
-    stock_minimo = models.IntegerField(null=True, blank=True)
+    stock_actual = models.IntegerField(default=0, null=True, blank=True)   # ✅ valor por defecto
+    stock_minimo = models.IntegerField(default=0, null=True, blank=True)   # ✅ valor por defecto
     proveedor = models.ForeignKey('Proveedor', on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.nombre
     
     def __str__(self):
         return self.nombre

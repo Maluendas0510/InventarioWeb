@@ -13,19 +13,18 @@
         <h2> SISTEMA DE INVENTARIO </h2>
         <div class="login-btn">
         {% if user.is_authenticated %}
-        <a href="{% url 'logout' %}" class="logout">Cerrar sesión</a>
+        <a href="{% url 'logout' %}" class="logout">CERRAR SESION</a>
         {% else %}
         <a href="{% url 'login' %}" class="login">INGRESAR</a>
         {% endif %}
     </div>
 
         <ul>
-            <li><a href="{% url 'index' %}"> Inicio</a></li>
+            <li><a href="{% url 'inicio' %}"> Inicio</a></li>
             <li><a href="{% url 'categorias' %}"> Categorías</a></li>
             <li><a href="{% url 'proveedores'%}"> Proveedores</a></li>
             <li><a href="{% url 'productos'%}"> Productos</a></li>
             <li><a href="{% url 'informacion' %}"> Información</a></li>
-            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
 
         </ul>
     </div>

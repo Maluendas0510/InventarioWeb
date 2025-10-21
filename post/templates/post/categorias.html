@@ -10,26 +10,45 @@
 {% block content %}
 <h1>Categorías</h1>
 
+{% if user.is_superuser %}
+<div class="form-section">
+    <h2>Agregar nueva categoría</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+</div>
+{% endif %}
+
 <div class="categorias-container">
     <table>
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                {% if user.is_superuser %}
                 <th>Acciones</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
+            {% for categoria in categorias %}
             <tr>
-                <td>1</td>
-                <td>Equipos eléctricos</td>
-                <td><button>Editar</button> <button>Eliminar</button></td>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nombre }}</td>
+                {% if user.is_superuser %}
+                <td>
+                    <a href="{% url 'editar_categoria' categoria.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'eliminar_categoria' categoria.id %}" class="btn btn-danger" onclick="return confirm('¿Seguro que deseas eliminar esta categoría?')">Eliminar</a>
+                </td>
+                {% endif %}
             </tr>
+            {% empty %}
             <tr>
-                <td>2</td>
-                <td>Repuestos</td>
-                <td><button>Editar</button> <button>Eliminar</button></td>
+                <td colspan="3">No hay categorías registradas.</td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>

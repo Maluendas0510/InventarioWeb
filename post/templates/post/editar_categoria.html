@@ -1,0 +1,11 @@
+{% extends 'post/base.html' %}
+{% block content %}
+<h1>Editar categoría: {{ categoria.nombre }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Guardar cambios</button>
+    <a href="{% url 'categorias' %}" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -79,28 +79,47 @@ h3 {
   </tbody>
 </table>
 
-<h3>Proveedores</h3>
+<h3>Productos</h3>
 <table>
   <thead>
     <tr>
       <th>ID</th>
       <th>Nombre</th>
-      <th>Email</th>
-      <th>Teléfono</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Stock actual / mínimo</th>
+      <th>Proveedor</th>
+      <th>Categoría</th>
     </tr>
   </thead>
   <tbody>
-    {% for p in proveedores %}
+    {% for p in productos %}
       <tr>
         <td>{{ p.id }}</td>
-        <td contenteditable="true">{{ p.nombre }}</td>
-        <td contenteditable="true">{{ p.email }}</td>
-        <td contenteditable="true">{{ p.telefono }}</td>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.descripcion }}</td>
+        <td>${{ p.precio }}</td>
+        <td>
+          {% if not user.is_superuser %}
+            <form method="POST" style="display:flex; gap:5px; align-items:center;">
+              {% csrf_token %}
+              <input type="hidden" name="producto_id" value="{{ p.id }}">
+              <input type="number" name="stock_actual" value="{{ p.stock_actual }}" class="form-control" style="width:80px;">
+              <input type="number" name="stock_minimo" value="{{ p.stock_minimo }}" class="form-control" style="width:80px;">
+              <button type="submit" class="btn btn-sm btn-primary">💾</button>
+            </form>
+          {% else %}
+            {{ p.stock_actual }} / {{ p.stock_minimo }}
+          {% endif %}
+        </td>
+        <td>{{ p.proveedor.nombre }}</td>
+        <td>{{ p.categoria.nombre }}</td>
       </tr>
     {% empty %}
-      <tr><td colspan="4">No hay proveedores registrados.</td></tr>
+      <tr><td colspan="7">No hay productos registrados.</td></tr>
     {% endfor %}
   </tbody>
 </table>
+
 
 {% endblock %}

@@ -1,17 +1,45 @@
 {% extends 'post/base.html' %}
 {% load static %}
 
-{% block extra_head %}
-<title>Proveedores</title>
-{% endblock extra_head %}
+{% block title %}Proveedores | Inventario{% endblock title %}
 
 {% block content %}
 <div class="main-content">
-    <h1> Proveedores</h1>
+  <h1>Proveedores</h1>
 
-    <div class="card">
-        <p>Aquí puedes ver, agregar o editar tus proveedores.</p>
-        <button class="btn"> Agregar proveedor</button>
-    </div>
+  <div class="card">
+    <p>Aquí puedes ver, agregar o editar tus proveedores.</p>
+
+    <form method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn">Agregar proveedor</button>
+    </form>
+  </div>
+
+  <hr>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for proveedor in proveedores %}
+      <tr>
+        <td>{{ proveedor.id }}</td>
+        <td>{{ proveedor.nombre }}</td>
+        <td>{{ proveedor.email }}</td>
+        <td>{{ proveedor.telefono }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4">No hay proveedores registrados.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
-{% endblock content %}
+{% endblock %}
